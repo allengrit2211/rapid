@@ -26,13 +26,13 @@
 
 	<insert id="insert${className}" useGeneratedKeys="true" keyProperty="id" parameterType="${basepackage}.entity.${className}">
 	    INSERT INTO ${table.sqlName} (
-			<trim prefix="," suffixOverrides=",">
+			<trim suffixOverrides=",">
 			<#list table.notPkColumns as column>
 			<if test="${column.columnNameLower}!=null">${column}<#if column_has_next>,</#if></if>
 			</#list>
 			</trim>
 		) VALUES (
-			<trim prefix="," suffixOverrides=",">
+			<trim suffixOverrides=",">
 			<#list table.notPkColumns as column>
 			<if test="${column.columnNameLower}!=null">${f}{${column.columnNameLower}}<#if column_has_next>,</#if></if>
 			</#list>
@@ -52,12 +52,11 @@
 		</if>
         </#list>
         </set>
-	    WHERE
-			<include refid="pageWhere" />
+		<include refid="pageWhere" />
 	</update>
 
 	<delete id="delete${className}">
-    <![CDATA[ DELETE FROM ${table.sqlName} t1 WHERE t1.id = ${f}{id} ]]>
+    <![CDATA[ DELETE FROM ${table.sqlName} WHERE id = ${f}{id} ]]>
 	</delete>
 	
 	<select id="get${className}ById" resultMap="${className}RM">

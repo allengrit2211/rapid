@@ -88,6 +88,17 @@ public class ${className}ServiceImplTest{
 	public void testGet${className}() {
 		Map param = new HashMap<>();
 		param.put("id",1);
+		<#list table.notPkColumns as column>
+		<#if (column.javaType?index_of("Integer")>0) >
+		param.put("${column}",1);
+		<#elseif (column.javaType?index_of("String")>0) >
+		param.put("${column}","xxx");
+		<#elseif (column.javaType?index_of("Date")>0) >
+		param.put("${column}",new Date());
+		<#elseif (column.javaType?index_of("Short")>0) >
+		param.put("${column}",(short)0);
+		</#if>
+		</#list>
 		${classNameLower}Service.get${className}(param);
 	}
 
@@ -96,6 +107,17 @@ public class ${className}ServiceImplTest{
 	public void testGet${className}List() {
 		Map param = new HashMap<>();
 		param.put("id",1);
+		<#list table.notPkColumns as column>
+		<#if (column.javaType?index_of("Integer")>0) >
+		param.put("${column}",1);
+		<#elseif (column.javaType?index_of("String")>0) >
+		param.put("${column}","xxx");
+		<#elseif (column.javaType?index_of("Date")>0) >
+		param.put("${column}",new Date());
+		<#elseif (column.javaType?index_of("Short")>0) >
+		param.put("${column}",(short)0);
+		</#if>
+		</#list>
 		${classNameLower}Service.get${className}List(param);
 	}
 
@@ -104,6 +126,17 @@ public class ${className}ServiceImplTest{
 	public void testGet${className}Count() {
 		Map param = new HashMap<>();
 		param.put("id",1);
+		<#list table.notPkColumns as column>
+		<#if (column.javaType?index_of("Integer")>0) >
+		param.put("${column}",1);
+		<#elseif (column.javaType?index_of("String")>0) >
+		param.put("${column}","xxx");
+		<#elseif (column.javaType?index_of("Date")>0) >
+		param.put("${column}",new Date());
+		<#elseif (column.javaType?index_of("Short")>0) >
+		param.put("${column}",(short)0);
+		</#if>
+		</#list>
 		${classNameLower}Service.get${className}Count(param);
 	}
 
@@ -111,6 +144,17 @@ public class ${className}ServiceImplTest{
 	@Rollback(true)
 	public void testGetSplit${className}List() {
 		Map param = new HashMap<>();
+		<#list table.notPkColumns as column>
+		<#if (column.javaType?index_of("Integer")>0) >
+		param.put("${column}",1);
+		<#elseif (column.javaType?index_of("String")>0) >
+		param.put("${column}","xxx");
+		<#elseif (column.javaType?index_of("Date")>0) >
+		param.put("${column}",new Date());
+		<#elseif (column.javaType?index_of("Short")>0) >
+		param.put("${column}",(short)0);
+		</#if>
+		</#list>
 		param.put("endSize",0);
 		param.put("pageSize",100);
 		${classNameLower}Service.getSplit${className}List(param);
