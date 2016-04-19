@@ -1,0 +1,112 @@
+<#include "/macro.include"/>
+<#assign className = table.className>   
+<#assign classNameLower = className?uncap_first> 
+<#assign f = "#">
+<#assign ff = "$">
+<#macro mapperEl value>${r"#{"}${value}}</#macro>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+
+<mapper namespace="${basepackage}.mapper.${className}Mapper">
+
+	<resultMap id="${className}RM" type="${basepackage}.entity.${className}">
+		<#list table.columns as column>
+		<result property="${column.columnNameLower}" column="${column}"/>
+		</#list>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		<#list table.columns as column>
+		t1.${column} ${column.columnNameLower}<#if column_has_next>,</#if>
+		</#list>
+	</sql>
+
+
+	<insert id="insert${className}" useGeneratedKeys="true" keyProperty="id" parameterType="${basepackage}.entity.${className}">
+	    INSERT INTO ${table.sqlName} (
+			<trim prefix="," suffixOverrides=",">
+			<#list table.notPkColumns as column>
+			<if test="${column.columnNameLower}!=null">${column}<#if column_has_next>,</#if></if>
+			</#list>
+			</trim>
+		) VALUES (
+			<trim prefix="," suffixOverrides=",">
+			<#list table.notPkColumns as column>
+			<if test="${column.columnNameLower}!=null">${f}{${column.columnNameLower}}<#if column_has_next>,</#if></if>
+			</#list>
+			</trim>
+		)
+		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() as id
+		</selectKey>     
+	</insert>
+
+	<update id="update${className}">
+	    UPDATE ${table.sqlName} t1
+        <set>
+       	<#list table.notPkColumns as column>
+		<if test="${column.columnNameLower}!=null">
+        	t1.${column} = <@mapperEl column.columnNameFirstLower/>,
+		</if>
+        </#list>
+        </set>
+	    WHERE
+			<include refid="pageWhere" />
+	</update>
+
+	<delete id="delete${className}">
+    <![CDATA[ DELETE FROM ${table.sqlName} t1 WHERE t1.id = ${f}{id} ]]>
+	</delete>
+	
+	<select id="get${className}ById" resultMap="${className}RM">
+		SELECT
+		<include refid="Base_Column_List" />
+	    FROM ${table.sqlName} t1 WHERE t1.id = ${f}{id}
+	</select>
+
+	<select id="get${className}" resultMap="${className}RM">
+	SELECT
+	<include refid="Base_Column_List" />
+	FROM ${table.sqlName} t1
+	<include refid="pageWhere" />
+	</select>
+
+	<select id="get${className}List" resultMap="${className}RM">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ${table.sqlName} t1
+		<include refid="pageWhere" />
+	</select>
+
+	<select id="get${className}Count" resultType="int">
+		SELECT count(*) FROM ${table.sqlName} t1
+		<include refid="pageWhere" />
+	</select>
+	
+	<select id="getSplit${className}List" resultMap="${className}RM">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ${table.sqlName} t1
+		<include refid="pageWhere" />
+		<if test="sortColumns!=null">
+			ORDER BY ${ff}{sortColumns}
+			<if test="sortColumnsDdsc=='desc'">
+				DESC
+			</if>
+		</if>
+		limit ${f}{endSize},${f}{pageSize}
+	</select>
+
+	<sql id="pageWhere">
+		<where>
+			<#list table.columns as column>
+			<if test="${column.columnNameLower}!=null">
+				AND t1.${column} = ${f}{${column.columnNameLower}}
+			</if>
+		</#list>
+		</where>
+	</sql>
+
+</mapper>
