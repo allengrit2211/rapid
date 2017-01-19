@@ -25,13 +25,13 @@ public class ${className} implements java.io.Serializable {
 	}
 	</#list>
 
-	public String toString() {
-		return new StringBuilder(super.toString()).append("=").append("[\n")
-		<#list table.columns as column>
-		.append("${column.columnName}=").append("<").append(get${column.columnName}()).append(">\n")
-		</#list>
-		.append("]")
-		.toString();
-	}
+//	public String toString() {
+//		return new StringBuilder(super.toString()).append("=").append("[\n")
+//		<#list table.columns as column>
+//		.append("${column.columnName}=").append("<").append(get${column.columnName}()).append(">\n")
+//		</#list>
+//		.append("]")
+//		.toString();
+//	}
 
 }

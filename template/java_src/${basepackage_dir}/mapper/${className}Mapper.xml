@@ -52,7 +52,8 @@
 		</if>
         </#list>
         </set>
-		<include refid="pageWhere" />
+	    WHERE
+			t1.id = ${f}{id}
 	</update>
 
 	<delete id="delete${className}">
@@ -89,12 +90,7 @@
 		<include refid="Base_Column_List" />
 		FROM ${table.sqlName} t1
 		<include refid="pageWhere" />
-		<if test="sortColumns!=null">
-			ORDER BY ${ff}{sortColumns}
-			<if test="sortColumnsDdsc=='desc'">
-				DESC
-			</if>
-		</if>
+		ORDER BY t1.id DESC
 		limit ${f}{endSize},${f}{pageSize}
 	</select>
 

@@ -15,6 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.ui.ModelMap;
 
 
 import ${basepackage}.entity.${className};
@@ -29,32 +32,24 @@ public class ${className}Controller {
 	@Autowired
 	private I${className}Service ${classNameLower}Service;
 
-	@RequestMapping(value = "/${classNameLower}/add")
-	public String add(HttpServletRequest request, Model model) {
-		return "/${className}/add";
-	}
-	
-	@RequestMapping(value = "/${className}/del")
-	public String del() {
-		return "/${className}/del";
-	}
-	
-	@RequestMapping(value = "/${className}/update")
-	public String update() {
-		return "/${className}/update";
-	}
-	
-	@RequestMapping(value = "/${classNameLower}/list")
-	public String list(HttpServletRequest request, Model model, PageView pageView) {
-		
+	@RequestMapping(value = "/${classNameLower}/${classNameLower}List")
+	public String ${classNameLower}List(HttpServletRequest request,Model model) {
+
+		int currentPage = Utils.toInteger(request.getParameter("currentPage"));
+
+		PageView pageView = new PageView();
+		model.addAttribute("pageView", pageView);
 		Map<String, Object> param = new HashMap<String, Object>();
 
 		int totalRecord = ${classNameLower}Service.get${className}Count(param);
 		if (totalRecord == 0) {
-			return "/${classNameLower}/list";
+		return "/${classNameLower}/${classNameLower}List";
 		}
 
-		pageView.setPageSize(10);
+
+		pageView.setCurrentPage(currentPage);
+		pageView.setTotalRecord(totalRecord);
+		pageView.setPageSize(5);
 
 		param.put("endSize", pageView.getFirstResult());
 		param.put("pageSize", pageView.getPageSize());
@@ -62,9 +57,51 @@ public class ${className}Controller {
 		List list = ${classNameLower}Service.getSplit${className}List(param);
 		pageView.setTotalRecord(totalRecord);
 		pageView.setRecords(list);
-		model.addAttribute("pageView", pageView);	
-		
-		return "/${classNameLower}/list";
+		model.addAttribute("pageView", pageView);
+
+		return "/${classNameLower}/${classNameLower}List";
+		}
+
+
+	@RequestMapping(value = "/${classNameLower}/${classNameLower}Edit")
+	@ResponseBody
+	public ModelMap ${classNameLower}Edit(HttpServletRequest request,${className} ${classNameLower}) {
+
+		ModelMap modelMap = new ModelMap();
+
+		int id = 0;
+		if(${classNameLower}.getId()==null){
+			id = ${classNameLower}Service.insert${className}(${classNameLower});
+		}else{
+			id = ${classNameLower}Service.update${className}(${classNameLower});
+		}
+		if(id>0){
+			modelMap.put("code",1);
+			modelMap.put("msg","保存成功");
+		}else{
+			modelMap.put("code",2);
+			modelMap.put("msg","保存失败");
+		}
+		return modelMap;
 	}
+	
+	@RequestMapping(value = "/${classNameLower}/${classNameLower}Del")
+	@ResponseBody
+	public ModelMap ${classNameLower}Del(HttpServletRequest request) {
+		ModelMap modelMap = new ModelMap();
+		int id = Utils.toInteger(request.getParameter("id"));
+		int _id = ${classNameLower}Service.delete${className}(id);
+		if (_id > 0) {
+			modelMap.put("code", 1);
+			modelMap.put("msg", "保存成功");
+		} else {
+			modelMap.put("code", 2);
+			modelMap.put("msg", "保存失败");
+		}
+		return modelMap;
+	}
+
+	
+
 
 }
