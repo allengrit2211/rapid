@@ -56,26 +56,26 @@
         }
 
         //加载内容列表
-        var url = "${ff}{pageContext.request.contextPath}/user/login";
-        ${ff}.ajax({
-            type: "post",
-            url:url,
-            data:{
-                userName:username.val(),
-                passWord:password.val()
-            },
-            success: function (data) {
-                ${ff}("#msg").html(data.msg)
-                setTimeout(function () {
-                    ${ff}("#msg").html("");
-                },3000)
-                if(data.code==1){
-                    setTimeout(function () {
-                        location.href =  url;
-                    },500)
-                }
-            }
-        });
+        <%--var url = "${ff}{pageContext.request.contextPath}/user/login";--%>
+        <%--${ff}.ajax({--%>
+            <%--type: "post",--%>
+            <%--url:url,--%>
+            <%--data:{--%>
+                <%--userName:username.val(),--%>
+                <%--passWord:password.val()--%>
+            <%--},--%>
+            <%--success: function (data) {--%>
+                <%--${ff}("#msg").html(data.msg)--%>
+                <%--setTimeout(function () {--%>
+                    <%--${ff}("#msg").html("");--%>
+                <%--},3000)--%>
+                <%--if(data.code==1){--%>
+                    <%--setTimeout(function () {--%>
+                        <%--location.href =  url;--%>
+                    <%--},500)--%>
+                <%--}--%>
+            <%--}--%>
+        <%--});--%>
 
 
     }
