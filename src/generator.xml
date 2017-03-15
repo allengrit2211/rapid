@@ -9,12 +9,13 @@
 	
 	
 	
-	<entry key="basepackage">com.starshow.core</entry>
+	<!--<entry key="basepackage">com.simland.hengdian</entry>-->
+	<entry key="basepackage">com.simland.core.module.shoppingguide</entry>
 	
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">pages</entry>
 
-	<entry key="outRoot">/home/zhuoer/IdeaProjects/rapid/out/generator-output</entry>
+	<entry key="outRoot">/generator-output</entry>
 	
 	<!-- 需要移除的表名前缀,使用逗号进行分隔多个前缀,示例值: t_,v_ -->
 	<entry key="tableRemovePrefixes">t_</entry>
@@ -41,10 +42,10 @@
 	 -->
 	
 	
-	<entry key="jdbc.url">jdbc:mysql://192.168.10.146:3306/smtg_db?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8</entry>
+	<entry key="jdbc.url">jdbc:mysql://192.168.10.142:3306/shoppingguide_db?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8</entry>
 	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
 	<entry key="jdbc.username">root</entry>
-	<entry key="jdbc.password">simlandserver</entry>
+	<entry key="jdbc.password">123123</entry>
 
 
 	<!-- Oracle		jdbc:oracle:oci:@tnsname_devdb-->

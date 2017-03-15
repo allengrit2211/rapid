@@ -1,4 +1,4 @@
-<#assign className = table.className>   
+<#assign className = table.className>
 <#assign classNameLower = className?uncap_first>
 <#assign classNameStr = className+'Controller'>
 package ${basepackage}.controller;
@@ -43,7 +43,7 @@ public class ${className}Controller {
 
 		int totalRecord = ${classNameLower}Service.get${className}Count(param);
 		if (totalRecord == 0) {
-		return "/${classNameLower}/${classNameLower}List";
+		    return "/${classNameLower}/${classNameLower}List";
 		}
 
 
@@ -60,7 +60,7 @@ public class ${className}Controller {
 		model.addAttribute("pageView", pageView);
 
 		return "/${classNameLower}/${classNameLower}List";
-		}
+	}
 
 
 	@RequestMapping(value = "/${classNameLower}/${classNameLower}Edit")
@@ -84,7 +84,7 @@ public class ${className}Controller {
 		}
 		return modelMap;
 	}
-	
+
 	@RequestMapping(value = "/${classNameLower}/${classNameLower}Del")
 	@ResponseBody
 	public ModelMap ${classNameLower}Del(HttpServletRequest request) {
@@ -93,15 +93,15 @@ public class ${className}Controller {
 		int _id = ${classNameLower}Service.delete${className}(id);
 		if (_id > 0) {
 			modelMap.put("code", 1);
-			modelMap.put("msg", "保存成功");
+			modelMap.put("msg", "刪除成功");
 		} else {
 			modelMap.put("code", 2);
-			modelMap.put("msg", "保存失败");
+			modelMap.put("msg", "刪除失败");
 		}
 		return modelMap;
 	}
 
-	
+
 
 
 }
