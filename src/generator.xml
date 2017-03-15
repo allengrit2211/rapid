@@ -10,6 +10,7 @@
 	<entry key="project">ShopGo</entry>
 	<entry key="basepackage">com.simland.shopgo</entry>
 	<entry key="basepackagecore">com.simland.shopgo.core</entry>
+	<entry key="jpg">.jpg</entry>
 	
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">pages</entry>
