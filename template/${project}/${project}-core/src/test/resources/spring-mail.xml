@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<#assign ff = "$">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<!-- SET default mail properties -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.exmail.qq.com" />
+		<property name="port" value="465" />
+		<property name="username" value="xxxx" />
+		<property name="password" value="xxxxx" />
+		<property name="protocol" value="smtp" />
+		<property name="defaultEncoding" value="UTF-8"></property>
+		<property name="javaMailProperties">
+			<props>
+
+				<prop key="mail.debug">true</prop>
+				<prop key="mail.smtp.connectiontimeout">480000</prop>
+				<prop key="mail.smtp.timeout">480000</prop>
+
+				<prop key="mail.smtp.socketFactory.port">465</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.smtp.ssl.enable">true</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.transport.protocol">smtp</prop>
+				
+				<prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+				<prop key="mail.smtp.socketFactory.fallback">false</prop>
+			</props>
+		</property>
+	</bean>
+
+	<!--Asyn send Eamil -->
+	<bean id="taskExecutor"
+		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="1" />
+		<property name="maxPoolSize" value="5" />
+	</bean>
+
+
+</beans>	

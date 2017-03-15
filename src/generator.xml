@@ -6,11 +6,10 @@
 		1.会为所有的property生成property_dir属性,如pkg=com.company => pkg_dir=com/company
 		2.可以引用环境变量: ${env.JAVA_HOME} or System.properties: ${user.home},property之间也可以相互引用
 	</comment>
-	
-	
-	
-	<!--<entry key="basepackage">com.simland.hengdian</entry>-->
-	<entry key="basepackage">com.simland.core.module.shoppingguide</entry>
+
+	<entry key="project">ShopGo</entry>
+	<entry key="basepackage">com.simland.shopgo</entry>
+	<entry key="basepackagecore">com.simland.shopgo.core</entry>
 	
 	<!-- jsp namespace: web/${namespace}/${className}/list.jsp -->
 	<entry key="namespace">pages</entry>

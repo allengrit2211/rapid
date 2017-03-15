@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+    <!--商品下架任务-->
+    <bean name="commodityDownTaskJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="${basepackage}.task.CommodityDownTask"/>
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="timeout" value="0"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="commodityDownCronTrigger"
+          class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="commodityDownTaskJob"/>
+        <property name="cronExpression" value="0 0/1 * * * ?"/><!-- 每分钟-->
+    </bean>
+
+
+    <!--启动任务-->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+
+        <property name="schedulerContextAsMap">
+            <map>
+                <entry key="commodityInvalidService" value-ref="commodityInvalidService"/>
+            </map>
+        </property>
+
+        <property name="triggers">
+            <list>
+                <ref bean="commodityDownCronTrigger"/>
+            </list>
+        </property>
+    </bean>
+
+
+</beans>

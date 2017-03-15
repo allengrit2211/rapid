@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<#assign ff = "$">
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-4.0.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+	http://www.springframework.org/schema/tx
+	http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+	<context:annotation-config />
+
+	<!-- 数据源的配置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${ff}{dataSource.driver}" />
+		<property name="url" value="${ff}{dataSource.url}" />
+		<property name="username" value="${ff}{dataSource.user}" />
+		<property name="password" value="${ff}{dataSource.password}" />
+		<!-- data source configuration -->
+		<property name="initialSize" value="${ff}{dataSource.initialSize}" /><!-- initial connections -->
+		<property name="maxActive" value="${ff}{dataSource.maxActive}" /><!-- MAX connections -->
+		<property name="maxIdle" value="${ff}{dataSource.maxIdle}" /><!-- MAX idle connections -->
+		<property name="minIdle" value="${ff}{dataSource.minIdle}" /><!-- MIN idle connections -->
+		<!-- 处理mysql 8小时自动断开连接的问题 -->
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testOnReturn" value="false" />
+		<property name="validationQuery" value="select 1" />
+		<property name="timeBetweenEvictionRunsMillis" value="20000" />
+		<property name="numTestsPerEvictionRun" value="100" />
+	</bean>
+
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath*:${basepackagecore?replace(".","/")}/mapper/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="${basepackagecore}.mapper"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- AOP 方式事务管理 -->
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager"> 
+		<tx:attributes> <tx:method name="update*" propagation="REQUIRED" read-only="false" 
+		/> <tx:method name="save*" propagation="REQUIRED" read-only="false" /> <tx:method 
+		name="set*" propagation="REQUIRED" read-only="false" /> <tx:method name="del*" 
+		propagation="REQUIRED" read-only="false" /> <tx:method name="remove*" propagation="REQUIRED" 
+		read-only="false" /> <tx:method name="add*" propagation="REQUIRED" read-only="false" 
+		/> <tx:method name="erase*" propagation="REQUIRED" read-only="false" /> <tx:method 
+		name="insert*" propagation="REQUIRED" read-only="false" /> <tx:method name="cancel*" 
+		propagation="REQUIRED" read-only="false" /> <tx:method name="exec*" propagation="REQUIRED" 
+		read-only="false" /> <tx:method name="*" propagation="SUPPORTS" read-only="true" 
+		/> </tx:attributes> </tx:advice> <aop:config> <aop:pointcut id="txInterceptor" 
+		expression="execution(* com.luckcart..*.service.*.*(..))" /> <aop:advisor 
+		advice-ref="txAdvice" pointcut-ref="txInterceptor" /> </aop:config> -->
+
+	<!-- Redis配置 -->
+	<!-- <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig"> 
+		<property name="maxIdle" value="${ff}{redis.maxIdle}" /> <property name="maxActive" 
+		value="${ff}{redis.maxActive}" /> <property name="maxWait" value="${ff}{redis.maxWait}" 
+		/> <property name="testOnBorrow" value="${ff}{redis.testOnBorrow}" /> </bean> 
+		<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" 
+		p:host-name="${ff}{redis.host}" p:port="${ff}{redis.port}" p:password="${ff}{redis.pass}" 
+		p:pool-config-ref="poolConfig"/> <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"> 
+		<property name="connectionFactory" ref="connectionFactory" /> </bean> -->
+
+</beans>
+	
