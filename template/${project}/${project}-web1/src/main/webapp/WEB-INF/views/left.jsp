@@ -4,11 +4,10 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="left">
     <ul>
-        <!--generator-insert-location-->
-        <li><a class="icon1" href="${ff}{pageContext.request.contextPath}/${classNameLower}/${classNameLower}List">${table.tableAlias}管理</a></li>
-        <!--generator-insert-location-->
+        <c:import url="../menu.jsp"/>
     </ul>
     <input type="button" value="退出登录" class="btnExit" onclick="loginout()"/>
 </div>

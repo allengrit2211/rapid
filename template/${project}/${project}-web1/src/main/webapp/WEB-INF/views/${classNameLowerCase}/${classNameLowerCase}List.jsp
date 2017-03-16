@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ taglib prefix="stag" uri="http://simland-tags.sf.net" %>
+<%@ taglib prefix="stag" uri="http://${project}-tags.sf.net" %>
 <!DOCTYPE html>
 <html>
 <head>

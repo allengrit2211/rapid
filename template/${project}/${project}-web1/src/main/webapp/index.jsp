@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <#assign ff = "$">
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
@@ -14,7 +16,7 @@
     <meta charset="UTF-8">
     <title>后台管理系统——用户登录</title>
     <link rel="stylesheet" href="${ff}{pageContext.request.contextPath}/css/style.css"/>
-    <script type="text/javascript" src="${ff}{pageContext.request.contextPath}/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="${ff}{pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 </head>
 <body>
 <div class="login-box">
@@ -77,6 +79,8 @@
             <%--}--%>
         <%--});--%>
 
+        var url = "${ff}{pageContext.request.contextPath}/${classNameLower}/${classNameLower}List";
+        location.href =  url;
 
     }
 </script>

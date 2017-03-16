@@ -28,48 +28,51 @@ public class Interceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        Object user = request.getSession().getAttribute(Constants.SESSION_USER);
-        if (Utils.isObjectEmpty(user)) {// 未登录
-            if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
-                String reJson = null;
 
-                response.setContentType("text/plan");
-                response.setCharacterEncoding("UTF-8");
-                PrintWriter out = response.getWriter();
-                out.println(reJson);
-                out.flush();
-                out.close();
-                return false;
-            }
-            response.sendRedirect(request.getContextPath() + "/");
-            return false;
-        } else {
+        return true;
 
-//            Map<String, String> powers = adminUser.getPowers();
-//            // 没有权限
-//            if (Utils.isObjectEmpty(powers) || powers.size() == 0) {
-//                response.sendRedirect(request.getContextPath() + "/user/login");
+//        Object user = request.getSession().getAttribute(Constants.SESSION_USER);
+//        if (Utils.isObjectEmpty(user)) {// 未登录
+//            if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+//                String reJson = null;
+//
+//                response.setContentType("text/plan");
+//                response.setCharacterEncoding("UTF-8");
+//                PrintWriter out = response.getWriter();
+//                out.println(reJson);
+//                out.flush();
+//                out.close();
 //                return false;
 //            }
+//            response.sendRedirect(request.getContextPath() + "/");
+//            return false;
+//        } else {
 //
-//            for (Entry<String, String> e : powers.entrySet()) {
-//                if (Utils.isObjectEmpty(Utils.notNullTrim(e.getKey())))
-//                    continue;
+////            Map<String, String> powers = adminUser.getPowers();
+////            // 没有权限
+////            if (Utils.isObjectEmpty(powers) || powers.size() == 0) {
+////                response.sendRedirect(request.getContextPath() + "/user/login");
+////                return false;
+////            }
+////
+////            for (Entry<String, String> e : powers.entrySet()) {
+////                if (Utils.isObjectEmpty(Utils.notNullTrim(e.getKey())))
+////                    continue;
+////
+////                logger.debug(request.getRequestURI());
+////
+////                String srcStr = request.getRequestURI();
+////                String subStr = request.getRequestURI().replace(Utils.notNullTrim(e.getKey()), "");
+////
+////                logger.debug("subStr=" + subStr + " powerUrl=" + e.getKey());
+////
+////                if (srcStr.equals(subStr + Utils.notNullTrim(e.getKey())))
+////                    return true;
+////            }
 //
-//                logger.debug(request.getRequestURI());
-//
-//                String srcStr = request.getRequestURI();
-//                String subStr = request.getRequestURI().replace(Utils.notNullTrim(e.getKey()), "");
-//
-//                logger.debug("subStr=" + subStr + " powerUrl=" + e.getKey());
-//
-//                if (srcStr.equals(subStr + Utils.notNullTrim(e.getKey())))
-//                    return true;
-//            }
-
-            response.sendRedirect(request.getContextPath() + "/permissions.jsp");
-            return false;
-        }
+//            response.sendRedirect(request.getContextPath() + "/permissions.jsp");
+//            return false;
+//        }
 
     }
 

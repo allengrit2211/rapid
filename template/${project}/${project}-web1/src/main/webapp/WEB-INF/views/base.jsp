@@ -2,7 +2,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" href="${ff}{pageContext.request.contextPath}/css/style.css"/>
-<script type="text/javascript" src="${ff}{pageContext.request.contextPath}/js/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="${ff}{pageContext.request.contextPath}/js/jquery-3.1.1.min.js"></script>
 
 <link rel="stylesheet" href="${ff}{pageContext.request.contextPath}/js/jquery.confirm/jquery.confirm.css" />
 <script src="${ff}{pageContext.request.contextPath}/js/jquery.confirm/jquery.confirm.js"></script>
