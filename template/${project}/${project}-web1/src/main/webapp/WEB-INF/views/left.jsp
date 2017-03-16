@@ -19,6 +19,8 @@
                 $(e).parent("li").addClass("active")
             }
         })
+        var _height = ${ff}(".back-gray").height();//可见区域高度
+        $(".left").css("min-height",_height);
     })
 
 </script>

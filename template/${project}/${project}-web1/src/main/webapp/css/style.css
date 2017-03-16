@@ -222,9 +222,9 @@ ul.pageView .pageInfo {
   height: 100%; }
 
 #body > div.left {
-  width: 200px;
+  width: 12%;
   background-color: #272a2b;
-  float: left; }
+  display: inline-block; }
 
 #body > div.left > ul {
   width: 100%;
@@ -301,9 +301,11 @@ ul.pageView .pageInfo {
   line-height: 36px; }
 
 #body > div.right {
-  width: 80%;
-  float: right;
-  overflow-y: auto; }
+  width: 87%;
+  margin-left: 0.4%;
+  display: inline-block;
+  overflow-y: auto;
+  vertical-align: top; }
 
 #body > div.right .content {
   padding: 30px;
@@ -478,9 +480,6 @@ ul.pageView .pageInfo {
 .table-list tr td.short2 {
   min-width: 52px; }
 
-.table-list tr td:last-child {
-  min-width: 150px; }
-
 .table-list tr.header {
   font-weight: bold;
   font-size: 14px;
@@ -596,7 +595,7 @@ ul.pageView .pageInfo {
 .popup-box ul li > span {
   display: inline-block;
   min-width: 60px;
-  float: left;
+  width: 100px;
   line-height: 35px;
   margin-right: 8px;
   margin-left: 30px; }
@@ -610,8 +609,7 @@ ul.pageView .pageInfo {
   border: 1px solid #CCC;
   height: 33px;
   line-height: 33px;
-  padding: 0 5px;
-  float: left; }
+  padding: 0 5px; }
 
 .popup-box ul li > input[type="datetime"] {
   display: inline-block;
