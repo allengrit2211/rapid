@@ -37,13 +37,24 @@
         });
     }
 
-    function outMsg(id,msg){
-        ${ff}("#"+id).html(msg);
-        try{
+    function toast(msg){
+        var _messDiv = document.getElementById("sty_msg");
+        if (_messDiv) {
+            _messDiv.style.display = 'block';
+            _messDiv.innerHTML = msg;
+        } else {
+            _messDiv = document.createElement("div");
+            _messDiv.id = "sty_msg";
+            _messDiv.innerHTML = msg;
+            document.body.appendChild(_messDiv);
+        }
+
+        if (_messDiv) {
+            $(_messDiv).animate({top:'30%'});
             setTimeout(function () {
-                ${ff}("#"+id).html("");
-            },5000)
-        }catch (e){};
+                $(_messDiv).fadeOut("slow");
+            }, 2200);
+        }
     }
 
 

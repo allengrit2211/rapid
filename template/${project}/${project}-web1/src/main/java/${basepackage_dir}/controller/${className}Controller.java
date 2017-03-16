@@ -50,7 +50,7 @@ public class ${className}Controller {
 
 		pageView.setCurrentPage(currentPage);
 		pageView.setTotalRecord(totalRecord);
-		pageView.setPageSize(20);
+		pageView.setPageSize(${pageSize});
 
 		param.put("endSize", pageView.getFirstResult());
 		param.put("pageSize", pageView.getPageSize());

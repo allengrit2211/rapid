@@ -27,7 +27,6 @@
                     <input id="add_btn" type="button" class="button-normal" value="新增" />
                 </div>
             </form>
-            <div id="msg" style="color: red;font-size: 12px;"></div>
             <table class="table-list" cellspacing="0">
                 <tr class="header">
                     <#list table.columns as column>
@@ -129,11 +128,13 @@
             url:url,
             success: function (data) {
                 if(data.code==1){
-                    outMsg("msg11",data.msg)
-                    window.location.reload()
+                    toast(data.msg)
+                    setTimeout(function () {
+                        window.location.reload()
+                    },1000)
                     popupClose()
                 }else{
-                    outMsg("msg1",data.msg)
+                    toast(data.msg)
                 }
             }
         });
@@ -160,11 +161,13 @@
                                 url:url,
                                 success: function (data) {
                                     if(data.code==1){
-                                        outMsg("msg11",data.msg)
-                                        window.location.reload()
+                                        toast(data.msg)
+                                        setTimeout(function () {
+                                            window.location.reload()
+                                        },1000)
                                         popupClose()
                                     }else{
-                                        outMsg("msg1",data.msg)
+                                        toast(data.msg)
                                     }
                                 }
                             });
