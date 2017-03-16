@@ -9,7 +9,6 @@
     <ul>
         <c:import url="../menu.jsp"/>
     </ul>
-    <input type="button" value="退出登录" class="btnExit" onclick="loginout()"/>
 </div>
 <script type="text/javascript">
     $(function () {
