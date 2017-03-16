@@ -24,6 +24,7 @@
                     <input id="phone" type="text" name="phone" value="${ff}{phone}" placeholder="请输入手机号码"/>
 
                     <input id="search_btn" type="submit" value="查询" style="margin-left: 10px;"/>
+                    <input id="add_btn" type="button" class="button-normal" value="新增" />
                 </div>
             </form>
             <div id="msg" style="color: red;font-size: 12px;"></div>
@@ -39,6 +40,7 @@
                         <#list table.columns as column>
                             <td>${ff}{item.${column.columnNameLower}}</td>
                         </#list>
+                        <td><input type="button" value="编辑" onclick="popupShow(${ff}{item.id},{<#list table.columns as column>'${column.columnNameLower}':'${ff}{item.${column.columnNameLower}}'<#if column_has_next>,</#if></#list>});"/><input type="button" value="删除" onclick="deleteItem(${ff}{item.id});"/></td>
                     </tr>
                 </c:forEach>
                 <tr>
@@ -54,7 +56,131 @@
     </div>
 </div>
 
+<div id="popupLimit" class="popup-box">
+    <div id="msg11"></div>
+    <form id="addForm" method="post" action="${ff}{pageContext.request.contextPath}/${classNameLower}/${classNameLower}Edit">
+        <input type="hidden" id="h_id" name="id">
+        <div class="close" onclick="popupClose();" title="关闭"></div>
+        <p class="title">添加</p>
+        <ul>
+            <#list table.notPkColumns as column>
+                <li>
+                    <span>${column.columnAlias}</span><input type="text" id="tb_${column.columnNameLower}" name="${column.columnNameLower}"/>
+                </li>
+            </#list>
+        </ul>
+        <div class="button-box">
+            <input type="button" value="取消" onclick="popupClose();" class="btn_cancel"/><input id="btn_submit" type="button" value="保存"/>
+        </div>
+    </form>
+</div>
+
+<div class="back-gray"></div>
+
 <script>
+
+    var w = ${ff}(".back-gray").width();//可见区域宽度
+    var h = ${ff}(".back-gray").height();//可见区域高度
+    var pLeft = (w-660)/2;
+    var pTop = (h-506)/2;
+
+    ${ff}("#add_btn").click(function(){
+        popupShow();
+    });
+
+    function popupShow(id,obj){ //打开编辑框
+
+        if(id){
+            ${ff}("#h_id").val(id);
+            <#list table.notPkColumns as column>
+            $("#tb_${column.columnNameLower}").val(obj.${column.columnNameLower});
+            </#list>
+            $("#addForm .title").text("编辑")
+        }else{
+            $("#addForm .title").text("添加")
+        }
+
+        ${ff}(".back-gray").show();
+        ${ff}("#popupLimit").css({"top":pTop+"px","left":pLeft+"px"}).show();
+    }
+
+    $("#btn_submit").click(function(){
+        //新增或编辑
+        if($("#popupLimit").attr("value")){
+            //alert("这是修改状态");
+
+        }else{
+            //alert("这是新增状态");
+
+        }
+
+        edit${className}();
+
+        popupClose();
+    });
+
+
+    function edit${className}() {
+
+        var url = "${ff}{pageContext.request.contextPath}/${classNameLower}/${classNameLower}Edit";
+        $.ajax({
+            type: "post",
+            data:$("#addForm").serialize(),
+            url:url,
+            success: function (data) {
+                if(data.code==1){
+                    outMsg("msg11",data.msg)
+                    window.location.reload()
+                    popupClose()
+                }else{
+                    outMsg("msg1",data.msg)
+                }
+            }
+        });
+    }
+
+    function popupClose(){ //关闭编辑框
+        ${ff}("#popupLimit").hide();
+        ${ff}(".back-gray").hide();
+    }
+
+    function deleteItem(id) {
+        if(id){
+            $.confirm({
+                'title'	: '消息框',
+                'message'	: '是否删该记录？',
+                'buttons'	:{
+                    '确认':{
+                        'class' : 'btn_ok',
+                        'action': function(){
+                            var url = "${ff}{pageContext.request.contextPath}/${classNameLower}/${classNameLower}Del";
+                            $.ajax({
+                                type: "post",
+                                data:{id:id},
+                                url:url,
+                                success: function (data) {
+                                    if(data.code==1){
+                                        outMsg("msg11",data.msg)
+                                        window.location.reload()
+                                        popupClose()
+                                    }else{
+                                        outMsg("msg1",data.msg)
+                                    }
+                                }
+                            });
+                        }
+                    },
+                    '取消':{
+                        'class' : 'gray',
+                        'action': function(){
+
+                        }
+                    }
+                }
+            });
+        }
+    }
+
 
 </script>
 </body>

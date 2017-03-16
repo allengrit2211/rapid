@@ -22,8 +22,7 @@
         });
     });
 
-    
-    
+
     function loginout() {
         var url = "${ff}{pageContext.request.contextPath}/user/loginout";
         ${ff}.ajax({
@@ -37,13 +36,6 @@
             }
         });
     }
-    window.onload=function()
-    {
-        changeDivHeight();
-    }
-    window.onresize=function(){
-        changeDivHeight();
-    }
 
     function outMsg(id,msg){
         ${ff}("#"+id).html(msg);
@@ -54,10 +46,5 @@
         }catch (e){};
     }
 
-    function changeDivHeight(){
-        var w = document.documentElement.clientWidth ;//可见区域宽度
-        var h = document.documentElement.clientHeight;//可见区域高度
-        document.getElementById("body").style.height=(h-100)+"px";
-        document.getElementById("body_right").style.width=(w-220)+"px";
-    }
+
 </script>

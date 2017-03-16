@@ -12,10 +12,13 @@
     <input type="button" value="退出登录" class="btnExit" onclick="loginout()"/>
 </div>
 <script type="text/javascript">
-    ${ff}(function () {
-        var contextPath = '${ff}{pageContext.request.contextPath}';
-        var tmp = contextPath+window.location.href.split(contextPath)[1].split("?")[0];
-        ${ff}("a[href*='"+tmp+"']").parent("li").addClass("active")
+    $(function () {
+        var url = window.location.href;
+        $(".left ul li a").each(function (i,e) {
+            if(url.indexOf($(e).attr("href"))>-1){
+                $(e).parent("li").addClass("active")
+            }
+        })
     })
 
 </script>
