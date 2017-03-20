@@ -7,9 +7,9 @@
 		2.可以引用环境变量: ${env.JAVA_HOME} or System.properties: ${user.home},property之间也可以相互引用
 	</comment>
 
-	<entry key="project">ShopGo</entry>
-	<entry key="basepackage">com.simland.shopgo</entry>
-	<entry key="basepackagecore">com.simland.shopgo.core</entry>
+	<entry key="project">dokee</entry>
+	<entry key="basepackage">com.dokee.manager</entry>
+	<entry key="basepackagecore">com.dokee.manager.core</entry>
 	<entry key="jpg">.jpg</entry>
 	<entry key="pageSize">15</entry>
 	
@@ -43,7 +43,7 @@
 	 -->
 	
 	
-	<entry key="jdbc.url">jdbc:mysql://192.168.10.142:3306/shoppingguide_db?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8</entry>
+	<entry key="jdbc.url">jdbc:mysql://192.168.10.142:3306/douke_db?zeroDateTimeBehavior=convertToNull&amp;characterEncoding=UTF-8</entry>
 	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
 	<entry key="jdbc.username">root</entry>
 	<entry key="jdbc.password">123123</entry>

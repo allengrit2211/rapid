@@ -50,7 +50,7 @@
         }
 
         if (_messDiv) {
-            $(_messDiv).animate({top:'30%'});
+            $(_messDiv).animate({top:'10%'});
             setTimeout(function () {
                 $(_messDiv).fadeOut("slow");
             }, 2200);
