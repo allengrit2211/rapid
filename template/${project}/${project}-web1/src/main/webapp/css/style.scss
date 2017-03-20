@@ -176,7 +176,7 @@ ul.pageView .pageInfo{padding-left:10px !important; padding-right: 0px !importan
 .popup-box ul li > input[type="text"]{@include textbox(400px,33px);}
 .popup-box ul li > input[type="datetime"]{@include textbox(260px,33px); float: left;}
 .popup-box ul li > input[type="number"]{@include textbox(60px,33px); float: left;}
-.popup-box ul li > select{float: left; height: 35px; margin-right: 10px; width: 220px;}
+.popup-box ul li > select{ height: 35px; margin-right: 10px; width: 220px;}
 .popup-box ul li > .tb-upload{width: 400px !important; border-right: 0 !important;}
 .popup-box ul li > .a-upload{padding: 0px 15px; height: 33px; line-height: 33px;}
 .popup-box .sub-box{width: 100%; overflow: hidden; margin-top: 15px;}
