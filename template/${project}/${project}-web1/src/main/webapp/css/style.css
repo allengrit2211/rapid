@@ -647,7 +647,6 @@ ul.pageView .pageInfo {
   float: left; }
 
 .popup-box ul li > select {
-  float: left;
   height: 35px;
   margin-right: 10px;
   width: 220px; }
