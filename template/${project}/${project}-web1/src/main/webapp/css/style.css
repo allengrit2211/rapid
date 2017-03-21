@@ -168,7 +168,7 @@ ul.pageView .pageInfo {
   padding: 10px;
   overflow: hidden;
   text-align: center;
-  z-index: 100;
+  z-index: 150;
   background-color: rgba(0, 0, 0, 0.7);
   box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.3); }
 

@@ -44,7 +44,7 @@ ul.pageView .pageInfo{padding-left:10px !important; padding-right: 0px !importan
 #btnLogin:hover{background-color: #da371f;}
 .login-box ul li.login-title{font-size: 28px; font-weight: bold; font-family: "微软简行楷"; padding-bottom: 20px; color: $ColorOver; text-align: center;}
 
-#sty_msg{color:#FFF; position: absolute; font-size: 24px;line-height: 80px;min-height: 80px; left: 40%; width: 20%;top:0;border-radius:5px; padding: 10px; overflow: hidden; text-align: center; z-index: 100; background-color: rgba(0,0,0,0.7); box-shadow:2px 5px 5px rgba(0,0,0,0.3);}
+#sty_msg{color:#FFF; position: absolute; font-size: 24px;line-height: 80px;min-height: 80px; left: 40%; width: 20%;top:0;border-radius:5px; padding: 10px; overflow: hidden; text-align: center; z-index: 150; background-color: rgba(0,0,0,0.7); box-shadow:2px 5px 5px rgba(0,0,0,0.3);}
 
 .a-upload {
     padding: 4px 15px;
