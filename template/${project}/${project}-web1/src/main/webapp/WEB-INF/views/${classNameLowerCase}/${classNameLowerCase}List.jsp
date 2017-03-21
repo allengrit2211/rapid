@@ -114,8 +114,6 @@
         }
 
         edit${className}();
-
-        popupClose();
     });
 
 

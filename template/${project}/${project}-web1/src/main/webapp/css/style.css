@@ -628,6 +628,14 @@ ul.pageView .pageInfo {
   line-height: 33px;
   padding: 0 5px; }
 
+.popup-box ul li > input[type="p"] {
+  display: inline-block;
+  width: 400px;
+  border: 1px solid #CCC;
+  height: 33px;
+  line-height: 33px;
+  padding: 0 5px; }
+
 .popup-box ul li > input[type="datetime"] {
   display: inline-block;
   width: 260px;
