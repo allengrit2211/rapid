@@ -1,6 +1,6 @@
 <#include "/macro.include"/>
-<#assign className = table.className>   
-<#assign classNameLower = className?uncap_first> 
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first>
 <#assign f = "#">
 <#assign ff = "$">
 <#macro mapperEl value>${r"#{"}${value}}</#macro>
@@ -40,8 +40,29 @@
 		)
 		<selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="id">
 		SELECT LAST_INSERT_ID() as id
-		</selectKey>     
+		</selectKey>
 	</insert>
+
+    <insert id="insertBatch${className}" parameterType="${basepackagecore}.entity.${className}">
+        <selectKey keyProperty="fetchTime" order="BEFORE" resultType="java.lang.String">
+            SELECT CURRENT_TIMESTAMP()
+        </selectKey>
+
+        INSERT INTO ${table.sqlName} (
+            <#list table.notPkColumns as column>
+            ${column}<#if column_has_next>,</#if>
+            </#list>
+        ) VALUES
+        <foreach collection="list" item="item" index="index" separator=",">
+        <![CDATA[
+            (
+            <#list table.notPkColumns as column>
+			    ${f}{item.${column.columnNameLower}}<#if column_has_next>,</#if>
+			</#list>
+            )
+        ]]>
+        </foreach>
+    </insert>
 
 	<update id="update${className}">
 	    UPDATE ${table.sqlName} t1
@@ -59,7 +80,7 @@
 	<delete id="delete${className}">
     <![CDATA[ DELETE FROM ${table.sqlName} WHERE id = ${f}{id} ]]>
 	</delete>
-	
+
 	<select id="get${className}ById" resultMap="${className}RM">
 		SELECT
 		<include refid="Base_Column_List" />
@@ -84,7 +105,7 @@
 		SELECT count(*) FROM ${table.sqlName} t1
 		<include refid="pageWhere" />
 	</select>
-	
+
 	<select id="getSplit${className}List" resultMap="${className}RM">
 		SELECT
 		<include refid="Base_Column_List" />

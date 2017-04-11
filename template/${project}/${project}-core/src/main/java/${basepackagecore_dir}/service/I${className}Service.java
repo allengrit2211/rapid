@@ -14,6 +14,8 @@ public interface I${className}Service {
 	
 	public Integer insert${className}(${className} ${classNameLower});
 
+	public Integer insertBatch${className}(List<${className}> ${classNameLower}s);
+
 	public Integer update${className}(${className} ${classNameLower});
 
 	public Integer delete${className}(Integer id);

@@ -11,8 +11,10 @@ import ${basepackagecore}.entity.${className};
 <#include "/info.include">
 public interface ${className}Mapper{
 	
-	public Integer insert${className}(${className} ${classNameLower});  	
-	
+	public Integer insert${className}(${className} ${classNameLower});
+
+	public Integer insertBatch${className}(List<${className}> ${classNameLower}s);
+
 	public Integer update${className}(${className} ${classNameLower});
 	
 	public Integer delete${className}(Integer id);

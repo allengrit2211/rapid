@@ -29,6 +29,11 @@ public class ${className}ServiceImpl implements I${className}Service{
 	}
 
 	@Transactional(readOnly=false)
+	public Integer insertBatch${className}(List<${className}> ${classNameLower}s){
+		return ${classNameLower}Mapper.insertBatch${className}(${classNameLower}s);
+	}
+
+	@Transactional(readOnly=false)
 	public Integer update${className}(${className} ${classNameLower}) {
 		return ${classNameLower}Mapper.update${className}(${classNameLower});
 	}
