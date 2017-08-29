@@ -5,6 +5,8 @@ package ${basepackagecore}.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -19,6 +21,8 @@ import ${basepackagecore}.service.I${className}Service;
 @Transactional(readOnly=true)
 @Service("${classNameLower}Service")
 public class ${className}ServiceImpl implements I${className}Service{
+
+	public static final Log logger = LogFactory.getLog(${className}ServiceImpl.class);
 
 	@Autowired
 	private ${className}Mapper ${classNameLower}Mapper;
