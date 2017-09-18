@@ -62,8 +62,8 @@ public class ${className}ServiceImplTest{
             <#elseif (column.javaType?index_of("Short")>0) >
                     i${classNameLower}.set${column?cap_first}((short)0);
             </#if>
-            list.add(i${classNameLower});
             </#list>
+			list.add(i${classNameLower});
         }
 
 
