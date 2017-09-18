@@ -1,11 +1,8 @@
-<#assign className = table.className>   
-<#assign classNameLower = className?uncap_first> 
+<#assign className = table.className>
+<#assign classNameLower = className?uncap_first>
 package ${basepackagecore}.service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,6 +44,33 @@ public class ${className}ServiceImplTest{
 
 		${classNameLower}Service.insert${className}(i${classNameLower});
 	}
+
+    @Test
+    @Rollback(true)
+    public void testInsertBatch${className}() {
+
+        List<${className}> list = new ArrayList();
+        for(int i=0;i<10;i++){
+            ${className} i${classNameLower} = new ${className}();
+            <#list table.columns as column>
+            <#if (column.javaType?index_of("Integer")>0) >
+                    i${classNameLower}.set${column?cap_first}(0);
+            <#elseif (column.javaType?index_of("String")>0) >
+                    i${classNameLower}.set${column?cap_first}("xxx");
+            <#elseif (column.javaType?index_of("Date")>0) >
+                    i${classNameLower}.set${column?cap_first}(new Date());
+            <#elseif (column.javaType?index_of("Short")>0) >
+                    i${classNameLower}.set${column?cap_first}((short)0);
+            </#if>
+            list.add(i${classNameLower});
+            </#list>
+        }
+
+
+
+        ${classNameLower}Service.insertBatch${className}(list);
+    }
+
 
 	@Test
 	@Rollback(true)
@@ -115,5 +139,5 @@ public class ${className}ServiceImplTest{
 		param.put("pageSize",100);
 		${classNameLower}Service.getSplit${className}List(param);
 	}
-	
+
 }
